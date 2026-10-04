@@ -1,6 +1,6 @@
 package uvt.info.sp;
 
-public class Paragraph implements Element {
+public class Paragraph extends Element {
     private final String title;
 
     public Paragraph(String title) {

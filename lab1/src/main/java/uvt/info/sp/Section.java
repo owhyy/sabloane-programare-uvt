@@ -3,7 +3,7 @@ package uvt.info.sp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Section implements Element {
+public class Section extends Element {
     private final String name;
     private final List<Element> elements = new ArrayList<>();
 
@@ -21,12 +21,21 @@ public class Section implements Element {
 
     @Override
     public void add(Element e) {
+        if (e == null) {
+            throw new IllegalArgumentException("An element cannot be null");
+        }
+        if (e.getParent() != null) {
+            throw new IllegalArgumentException("Element already belongs to a section");
+        }
         elements.add(e);
+        e.setParent(this);
     }
 
     @Override
     public void remove(Element e) {
-        elements.remove(e);
+        if (elements.remove(e)) {
+            e.setParent(null);
+        }
     }
 
     @Override

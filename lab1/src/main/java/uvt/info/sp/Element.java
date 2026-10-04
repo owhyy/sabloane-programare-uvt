@@ -1,9 +1,19 @@
 package uvt.info.sp;
 
-public interface Element {
-    void print();
+public abstract class Element {
+    private Section parent;
 
-    void add(Element e);
-    void remove(Element e);
-    Element get(int i);
+    public Section getParent() {
+        return parent;
+    }
+
+    void setParent(Section parent) {
+        this.parent = parent;
+    }
+
+    public abstract void print();
+
+    public abstract void add(Element e);
+    public abstract void remove(Element e);
+    public abstract Element get(int i);
 }

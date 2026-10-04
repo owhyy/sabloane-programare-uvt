@@ -1,6 +1,6 @@
 package uvt.info.sp;
 
-public class Image implements Element {
+public class Image extends Element {
     private final String s;
 
     public Image(String s) {
