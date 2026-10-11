@@ -1,15 +1,24 @@
 package uvt.info.sp;
 
 public class Paragraph extends Element {
-    private final String title;
+    private final String text;
+    private AlignStrategy textAlignment;
 
-    public Paragraph(String title) {
-        this.title = title;
+    public Paragraph(String text) {
+        if (text == null) {
+            throw new IllegalArgumentException("Paragraph text cannot be null");
+        }
+        this.text = text;
     }
 
     @Override
     public void print() {
-        System.out.println("Paragraph: " + title);
+        Context context = new Context();
+        if (textAlignment == null) {
+            context.writeLine(text);
+            return;
+        }
+        textAlignment.render(text, context);
     }
 
     @Override
@@ -25,5 +34,9 @@ public class Paragraph extends Element {
     @Override
     public Element get(int i) {
         return null;
+    }
+
+    public void setAlignStrategy(AlignStrategy alignStrategy) {
+        this.textAlignment = alignStrategy;
     }
 }
