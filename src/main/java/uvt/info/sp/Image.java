@@ -15,8 +15,8 @@ public class Image extends Element {
     }
 
     @Override
-    public void print() {
-        System.out.println("Image with name: " + url);
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override
@@ -32,5 +32,9 @@ public class Image extends Element {
     @Override
     public Element get(int i) {
         return null;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

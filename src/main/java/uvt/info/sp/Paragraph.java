@@ -11,14 +11,17 @@ public class Paragraph extends Element {
         this.text = text;
     }
 
+    public String getText() {
+        return text;
+    }
+
     @Override
-    public void print() {
-        Context context = new Context();
-        if (textAlignment == null) {
-            context.writeLine(text);
-            return;
-        }
-        textAlignment.render(text, context);
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    public AlignStrategy getTextAlignment() {
+        return textAlignment;
     }
 
     @Override

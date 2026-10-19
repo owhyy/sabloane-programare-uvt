@@ -15,9 +15,8 @@ public class ImageProxy extends Element {
     }
 
     @Override
-    public void print() {
-        loadImage();
-        realImage.print();
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override
@@ -36,4 +35,11 @@ public class ImageProxy extends Element {
     }
 
 
+    public String getUrl() {
+        return url;
+    }
+
+    public Image getImage() {
+        return realImage;
+    }
 }

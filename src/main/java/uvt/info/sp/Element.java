@@ -11,9 +11,11 @@ public abstract class Element {
         this.parent = parent;
     }
 
-    public abstract void print();
+    public abstract void accept(Visitor visitor);
 
     public abstract void add(Element e);
+
     public abstract void remove(Element e);
+
     public abstract Element get(int i);
 }

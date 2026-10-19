@@ -11,12 +11,10 @@ public class Section extends Element {
         this.name = name;
     }
 
+
     @Override
-    public void print() {
-        System.out.println(name);
-        for (Element element : elements) {
-            element.print();
-        }
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override
@@ -41,5 +39,13 @@ public class Section extends Element {
     @Override
     public Element get(int i) {
         return elements.get(i);
+    }
+
+    public List<Element> getContent() {
+        return elements;
+    }
+
+    public String getName() {
+        return name;
     }
 }

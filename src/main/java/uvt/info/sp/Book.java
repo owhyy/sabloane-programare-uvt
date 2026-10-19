@@ -1,5 +1,7 @@
 package uvt.info.sp;
 
+import java.util.List;
+
 public class Book {
     private final String title;
     private final java.util.List<Author> authors;
@@ -11,6 +13,14 @@ public class Book {
         this.elements = new java.util.ArrayList<>();
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public List<Element> getContent() {
+        return elements;
+    }
+
     public void addAuthor(Author author) {
         this.authors.add(author);
     }
@@ -19,15 +29,7 @@ public class Book {
         this.elements.add(element);
     }
 
-    public void print() {
-        System.out.println("Book: " + title);
-        System.out.println("Authors:");
-        for (Author author : authors) {
-            author.print();
-        }
-        System.out.println();
-        for (Element element : elements) {
-            element.print();
-        }
+    public List<Author> getAuthors() {
+        return authors;
     }
 }
