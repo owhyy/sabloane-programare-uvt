@@ -1,10 +1,10 @@
-package uvt.info.sp.controllers;
+package uvt.info.sp.web.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uvt.info.sp.components.ClientComponent;
+import uvt.info.sp.web.components.ClientComponent;
 
 @RestController
 @RequiredArgsConstructor(onConstructor_ = @Autowired)

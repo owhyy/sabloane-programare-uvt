@@ -3,9 +3,9 @@ package uvt.info.sp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import uvt.info.sp.components.ClientComponent;
-import uvt.info.sp.components.SingletonComponent;
-import uvt.info.sp.components.TransientComponent;
+import uvt.info.sp.web.components.ClientComponent;
+import uvt.info.sp.web.components.SingletonComponent;
+import uvt.info.sp.web.components.TransientComponent;
 
 @SpringBootApplication
 public class SpApplication {

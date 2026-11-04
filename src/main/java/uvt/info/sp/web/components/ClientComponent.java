@@ -1,4 +1,4 @@
-package uvt.info.sp.components;
+package uvt.info.sp.web.components;
 
 import org.springframework.stereotype.Component;
 
