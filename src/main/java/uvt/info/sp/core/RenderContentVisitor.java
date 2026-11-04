@@ -1,4 +1,4 @@
-package uvt.info.sp;
+package uvt.info.sp.core;
 
 public class RenderContentVisitor implements Visitor {
     @Override
