@@ -14,22 +14,22 @@ public class SpApplication {
         ApplicationContext context =
                 SpringApplication.run(SpApplication.class, args);
 
-		TransientComponent transientBean =
-				context.getBean(TransientComponent.class);
-		transientBean.operation();
-		transientBean = context.getBean(TransientComponent.class);
-		transientBean.operation();
+        TransientComponent transientBean =
+                context.getBean(TransientComponent.class);
+        transientBean.operation();
+        transientBean = context.getBean(TransientComponent.class);
+        transientBean.operation();
 
-		SingletonComponent singletonBean =
-				context.getBean(SingletonComponent.class);
-		singletonBean.operation();
-		singletonBean = context.getBean(SingletonComponent.class);
-		singletonBean.operation();
+        SingletonComponent singletonBean =
+                context.getBean(SingletonComponent.class);
+        singletonBean.operation();
+        singletonBean = context.getBean(SingletonComponent.class);
+        singletonBean.operation();
 
-		ClientComponent c = context.getBean(ClientComponent.class);
-		c.operation();
-		c = (ClientComponent)context.getBean("clientComponent");
-		c.operation();
+        ClientComponent c = context.getBean(ClientComponent.class);
+        c.operation();
+        c = (ClientComponent) context.getBean("clientComponent");
+        c.operation();
     }
 
 }

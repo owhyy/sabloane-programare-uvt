@@ -1,12 +1,13 @@
 package uvt.info.sp.core;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
 public class ImageProxy extends Element {
     private final String url;
     private Image realImage;
-
-    public ImageProxy(String url) {
-        this.url = url;
-    }
 
     public void loadImage() {
         if (realImage == null) {
@@ -32,14 +33,5 @@ public class ImageProxy extends Element {
     @Override
     public Element get(int i) {
         return null;
-    }
-
-
-    public String getUrl() {
-        return url;
-    }
-
-    public Image getImage() {
-        return realImage;
     }
 }

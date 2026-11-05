@@ -1,15 +1,17 @@
 package uvt.info.sp.web.components;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class SingletonComponent {
     public SingletonComponent() {
-        System.out.println("SingletonComponent::SingletonComponent = " + this);
+        log.info("SingletonComponent::SingletonComponent = {}", this);
     }
 
 
     public void operation() {
-        System.out.println("SingletonComponent::operation() called on " + this);
+        log.info("SingletonComponent::operation() called on {}", this);
     }
 }

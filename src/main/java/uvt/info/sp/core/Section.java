@@ -1,11 +1,22 @@
 package uvt.info.sp.core;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Section extends Element {
-    private final String name;
-    private final List<Element> elements = new ArrayList<>();
+    private String name;
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Element> elements = new ArrayList<>();
 
     public Section(String name) {
         this.name = name;
@@ -39,13 +50,5 @@ public class Section extends Element {
     @Override
     public Element get(int i) {
         return elements.get(i);
-    }
-
-    public List<Element> getContent() {
-        return elements;
-    }
-
-    public String getName() {
-        return name;
     }
 }

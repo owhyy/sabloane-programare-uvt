@@ -1,7 +1,17 @@
 package uvt.info.sp.core;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Paragraph extends Element {
-    private final String text;
+    private String text;
+    @Transient
     private AlignStrategy textAlignment;
 
     public Paragraph(String text) {
@@ -11,17 +21,9 @@ public class Paragraph extends Element {
         this.text = text;
     }
 
-    public String getText() {
-        return text;
-    }
-
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
-    }
-
-    public AlignStrategy getTextAlignment() {
-        return textAlignment;
     }
 
     @Override
@@ -39,7 +41,4 @@ public class Paragraph extends Element {
         return null;
     }
 
-    public void setAlignStrategy(AlignStrategy alignStrategy) {
-        this.textAlignment = alignStrategy;
-    }
 }

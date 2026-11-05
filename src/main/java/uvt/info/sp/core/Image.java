@@ -1,16 +1,27 @@
 package uvt.info.sp.core;
 
+import jakarta.persistence.Entity;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.TimeUnit;
 
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Slf4j
 public class Image extends Element {
-    private final String url;
+    private String url;
 
     public Image(String url) {
         this.url = url;
         try {
             TimeUnit.SECONDS.sleep(5);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("Interrupted while loading image '{}'", url, e);
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -34,7 +45,4 @@ public class Image extends Element {
         return null;
     }
 
-    public String getUrl() {
-        return url;
-    }
 }

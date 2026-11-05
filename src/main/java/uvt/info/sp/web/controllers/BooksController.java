@@ -1,7 +1,7 @@
 package uvt.info.sp.web.controllers;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uvt.info.sp.core.Book;
 import uvt.info.sp.web.commands.*;
@@ -54,7 +54,7 @@ public class BooksController {
     @DeleteMapping("/books/{id}")
     public CompletableFuture<ResponseEntity<Void>> deleteBook(@PathVariable Long id) {
         return commandExecutor.execute(new DeleteBookCommand(id), commandContext)
-                .thenApply(deleted -> deleted
+                .thenApply(deleted -> Boolean.TRUE.equals(deleted)
                         ? ResponseEntity.noContent().build()
                         : ResponseEntity.notFound().build());
     }

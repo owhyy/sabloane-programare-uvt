@@ -1,11 +1,21 @@
 package uvt.info.sp.core;
 
-public abstract class Element {
-    private Section parent;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-    public Section getParent() {
-        return parent;
-    }
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public abstract class Element {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @ManyToOne
+    private Section parent;
 
     void setParent(Section parent) {
         this.parent = parent;

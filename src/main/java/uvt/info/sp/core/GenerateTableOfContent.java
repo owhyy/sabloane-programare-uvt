@@ -1,15 +1,16 @@
 package uvt.info.sp.core;
 
-public class GenerateTableOfContent implements Visitor {
-    private final TableOfContent tableOfContent;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-    public GenerateTableOfContent() {
-        this.tableOfContent = new TableOfContent();
-    }
+@Getter
+@NoArgsConstructor
+public class GenerateTableOfContent implements Visitor {
+    private final TableOfContent tableOfContent = new TableOfContent();
 
     @Override
     public void visit(Book book) {
-        for (Element element : book.getContent()) {
+        for (Element element : book.getElements()) {
             element.accept(this);
         }
     }
@@ -17,7 +18,7 @@ public class GenerateTableOfContent implements Visitor {
     @Override
     public void visit(Section section) {
         tableOfContent.add(section);
-        for (Element element : section.getContent()) {
+        for (Element element : section.getElements()) {
             element.accept(this);
         }
     }
@@ -42,9 +43,5 @@ public class GenerateTableOfContent implements Visitor {
         for (Section section : tableOfContent.getSections()) {
             section.accept(this);
         }
-    }
-
-    public TableOfContent getTableOfContent() {
-        return tableOfContent;
     }
 }

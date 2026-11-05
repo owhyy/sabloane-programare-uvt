@@ -1,17 +1,21 @@
 package uvt.info.sp.core;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TableOfContent extends Element {
-    private final List<Section> sections;
-
-    public TableOfContent() {
-        this.sections = new java.util.ArrayList<>();
-    }
-
-    public TableOfContent(List<Section> sections) {
-        this.sections = sections;
-    }
+    @ManyToMany
+    private List<Section> sections = new ArrayList<>();
 
     @Override
     public void accept(Visitor visitor) {
@@ -20,8 +24,8 @@ public class TableOfContent extends Element {
 
     @Override
     public void add(Element e) {
-        if (e instanceof Section) {
-            sections.add((Section) e);
+        if (e instanceof Section section) {
+            sections.add(section);
         } else {
             throw new IllegalArgumentException("Only Section elements can be added to TableOfContent");
         }
@@ -35,9 +39,5 @@ public class TableOfContent extends Element {
     @Override
     public Element get(int i) {
         return null;
-    }
-
-    public List<Section> getSections() {
-        return sections;
     }
 }

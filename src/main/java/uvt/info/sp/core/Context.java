@@ -1,5 +1,10 @@
 package uvt.info.sp.core;
 
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
+
+@Getter
+@Slf4j
 public class Context {
     private final int lineWidth;
 
@@ -14,11 +19,7 @@ public class Context {
         this.lineWidth = lineWidth;
     }
 
-    public int getLineWidth() {
-        return lineWidth;
-    }
-
     public void writeLine(String line) {
-        System.out.println(line);
+        log.info(line);
     }
 }

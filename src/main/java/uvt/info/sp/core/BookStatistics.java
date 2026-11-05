@@ -1,19 +1,20 @@
 package uvt.info.sp.core;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Getter
+@NoArgsConstructor
+@Slf4j
 public class BookStatistics implements Visitor {
     private int numberOfSections;
     private int numberOfParagraphs;
     private int numberOfImages;
 
-    public BookStatistics() {
-        this.numberOfSections = 0;
-        this.numberOfParagraphs = 0;
-        this.numberOfImages = 0;
-    }
-
     @Override
     public void visit(Book book) {
-        for (Element element : book.getContent()) {
+        for (Element element : book.getElements()) {
             element.accept(this);
         }
     }
@@ -21,7 +22,7 @@ public class BookStatistics implements Visitor {
     @Override
     public void visit(Section section) {
         numberOfSections++;
-        for (Element element : section.getContent()) {
+        for (Element element : section.getElements()) {
             element.accept(this);
         }
     }
@@ -48,21 +49,9 @@ public class BookStatistics implements Visitor {
         }
     }
 
-    public int getNumberOfParagraphs() {
-        return numberOfParagraphs;
-    }
-
-    public int getNumberOfImages() {
-        return numberOfImages;
-    }
-
-    public int getNumberOfSections() {
-        return numberOfSections;
-    }
-
     public void print() {
-        System.out.println("Number of sections: " + numberOfSections);
-        System.out.println("Number of paragraphs: " + numberOfParagraphs);
-        System.out.println("Number of images: " + numberOfImages);
+        log.info("Number of sections: {}", numberOfSections);
+        log.info("Number of paragraphs: {}", numberOfParagraphs);
+        log.info("Number of images: {}", numberOfImages);
     }
 }

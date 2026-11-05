@@ -1,20 +1,23 @@
 package uvt.info.sp.core;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class RenderContentVisitor implements Visitor {
     @Override
     public void visit(Book book) {
-        System.out.println("Book: " + book.getTitle());
-        System.out.println("Authors:");
+        log.info("Book: {}", book.getTitle());
+        log.info("Authors:");
         for (Author author : book.getAuthors()) {
-            System.out.println("Author: " + author.name());
+            log.info("Author: {}", author.getName());
         }
-        System.out.println();
+        log.info("");
     }
 
     @Override
     public void visit(Section section) {
-        System.out.println("Section: " + section.getName());
-        for (Element element : section.getContent()) {
+        log.info("Section: {}", section.getName());
+        for (Element element : section.getElements()) {
             element.accept(this);
         }
     }
@@ -35,16 +38,17 @@ public class RenderContentVisitor implements Visitor {
     @Override
     public void visit(ImageProxy imageProxy) {
         imageProxy.loadImage();
-        visit(imageProxy.getImage());
+        visit(imageProxy.getRealImage());
     }
 
     @Override
     public void visit(Image image) {
-        System.out.println("Image: " + image.getUrl());
+        log.info("Image: {}", image.getUrl());
     }
 
+    @Override
     public void visit(TableOfContent tableOfContent) {
-        System.out.println("Table of Content:");
+        log.info("Table of Content:");
         for (Element element : tableOfContent.getSections()) {
             element.accept(this);
         }
