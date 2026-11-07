@@ -7,6 +7,6 @@ import java.util.List;
 public class GetBooksCommand implements Command<List<Book>> {
     @Override
     public List<Book> execute(CommandContext context) {
-        return context.booksService().findAll();
+        return context.booksRepository().findAll();
     }
 }

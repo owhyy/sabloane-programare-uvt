@@ -1,5 +1,6 @@
 package uvt.info.sp.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -15,6 +16,7 @@ public abstract class Element {
     private Long id;
 
     @ManyToOne
+    @Getter(onMethod_ = @JsonIgnore)
     private Section parent;
 
     void setParent(Section parent) {

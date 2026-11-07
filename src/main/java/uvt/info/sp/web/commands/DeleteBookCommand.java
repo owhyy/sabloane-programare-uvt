@@ -8,6 +8,10 @@ public class DeleteBookCommand implements Command<Boolean> {
 
     @Override
     public Boolean execute(CommandContext context) {
-        return context.booksService().delete(id);
+        if (!context.booksRepository().existsById(id)) {
+            return false;
+        }
+        context.booksRepository().deleteById(id);
+        return true;
     }
 }

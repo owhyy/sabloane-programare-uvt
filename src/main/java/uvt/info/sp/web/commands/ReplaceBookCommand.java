@@ -12,6 +12,10 @@ public class ReplaceBookCommand implements Command<Optional<Book>> {
 
     @Override
     public Optional<Book> execute(CommandContext context) {
-        return context.booksService().replace(id, title);
+        return context.booksRepository().findById(id)
+                .map(book -> {
+                    book.setTitle(title);
+                    return context.booksRepository().save(book);
+                });
     }
 }

@@ -1,5 +1,6 @@
 package uvt.info.sp.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Transient;
 import lombok.AccessLevel;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class Paragraph extends Element {
     private String text;
     @Transient
+    @Getter(onMethod_ = @JsonIgnore)
     private AlignStrategy textAlignment;
 
     public Paragraph(String text) {

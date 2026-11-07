@@ -9,6 +9,7 @@ public class CreateBookCommand implements Command<Book> {
 
     @Override
     public Book execute(CommandContext context) {
-        return context.booksService().create(title);
+        Book book = new Book(title);
+        return context.booksRepository().save(book);
     }
 }

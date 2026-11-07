@@ -1,12 +1,19 @@
 package uvt.info.sp.core;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+import lombok.*;
 
+@Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 @RequiredArgsConstructor
 public class ImageProxy extends Element {
-    private final String url;
+    @NonNull
+    private String url;
+    @Transient
+    @Getter(onMethod_ = @JsonIgnore)
     private Image realImage;
 
     public void loadImage() {

@@ -1,6 +1,7 @@
 package uvt.info.sp.core;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TableOfContent extends Element {
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Section> sections = new ArrayList<>();
 
     @Override

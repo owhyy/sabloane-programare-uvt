@@ -11,6 +11,6 @@ public class GetBookCommand implements Command<Optional<Book>> {
 
     @Override
     public Optional<Book> execute(CommandContext context) {
-        return context.booksService().findById(id);
+        return context.booksRepository().findById(id);
     }
 }

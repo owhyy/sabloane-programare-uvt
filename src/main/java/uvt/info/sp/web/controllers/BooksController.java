@@ -1,11 +1,12 @@
 package uvt.info.sp.web.controllers;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uvt.info.sp.core.Book;
+import uvt.info.sp.persistence.CrudRepository;
 import uvt.info.sp.web.commands.*;
-import uvt.info.sp.web.services.BooksService;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -17,9 +18,9 @@ public class BooksController {
     private final CommandExecutor commandExecutor;
 
     public BooksController(
-            BooksService booksService,
+            CrudRepository<Book, Long> booksRepository,
             @Qualifier("asynchronousCommandExecutor") CommandExecutor commandExecutor) {
-        this.commandContext = new CommandContext(booksService);
+        this.commandContext = new CommandContext(booksRepository);
         this.commandExecutor = commandExecutor;
     }
 
@@ -37,15 +38,16 @@ public class BooksController {
     }
 
     @PostMapping("/books")
-    public CompletableFuture<Book> createBook(@RequestBody String title) {
-        return commandExecutor.execute(new CreateBookCommand(title), commandContext);
+    public CompletableFuture<ResponseEntity<Book>> createBook(@RequestBody BookRequest request) {
+        return commandExecutor.execute(new CreateBookCommand(request.title()), commandContext)
+                .thenApply(book -> ResponseEntity.status(HttpStatus.CREATED).body(book));
     }
 
     @PutMapping("/books/{id}")
     public CompletableFuture<ResponseEntity<Book>> replaceBook(
             @PathVariable Long id,
-            @RequestBody String title) {
-        return commandExecutor.execute(new ReplaceBookCommand(id, title), commandContext)
+            @RequestBody BookRequest request) {
+        return commandExecutor.execute(new ReplaceBookCommand(id, request.title()), commandContext)
                 .thenApply(book -> book
                         .map(ResponseEntity::ok)
                         .orElseGet(() -> ResponseEntity.notFound().build()));
