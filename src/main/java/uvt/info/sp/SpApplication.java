@@ -3,12 +3,25 @@ package uvt.info.sp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import uvt.info.sp.web.components.ClientComponent;
 import uvt.info.sp.web.components.SingletonComponent;
 import uvt.info.sp.web.components.TransientComponent;
 
 @SpringBootApplication
 public class SpApplication {
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**");
+            }
+        };
+    }
 
     static void main(String[] args) {
         ApplicationContext context =
